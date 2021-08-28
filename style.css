@@ -37,6 +37,14 @@ button {
   background-color: #e9ecef;
 }
 
+.blue-button {
+  background-color: lightsteelblue;
+}
+
+.blue-button:hover {
+  background-color: lightskyblue !important;
+}
+
 .container > button:hover {
   background-color: #ced4da;
 }
