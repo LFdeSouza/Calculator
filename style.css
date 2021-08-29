@@ -17,7 +17,7 @@ body {
   justify-content: center;
   align-content: center;
   grid-template-columns: repeat(4, 100px);
-  grid-template-rows: 120px repeat(5, 85px);
+  grid-template-rows: minmax(120px, auto) repeat(5, 85px);
 }
 
 button {
@@ -68,6 +68,7 @@ button {
 }
 
 .current-display {
+  word-break: break-all; /* This will prevent overflown */
   color: white;
   font-size: 2.5rem;
   margin: 0 10px;

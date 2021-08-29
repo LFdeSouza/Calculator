@@ -14,7 +14,7 @@ clearButton.addEventListener("click", clearDisplay);
 
 delButton.addEventListener("click", deleteDigit);
 
-plusMinusButton.addEventListener("click", plusMinus);
+plusMinusButton.addEventListener("click", negate);
 
 numberButtons.forEach((number) =>
   number.addEventListener("click", (e) => appendNumber(e.target.textContent))
@@ -36,9 +36,6 @@ function compute(button) {
     return;
   } else if (operator === "=") {
     operator = button;
-    console.log(result);
-    console.log(currentOperand);
-    console.log(previousOperand);
     updateDisplay();
   } else {
     switch (operator) {
@@ -78,6 +75,9 @@ function appendNumber(button) {
   if (button === "." && currentOperand.includes(".")) {
     return;
   }
+  if (currentOperand.length > 15) {
+    return;
+  }
   currentOperand = currentOperand + button;
   updateDisplay();
 }
@@ -92,7 +92,7 @@ function displayResults() {
   currentDisplay.textContent = result;
 }
 
-function plusMinus() {
+function negate() {
   if (currentOperand === "") {
     currentOperand = -result;
     updateDisplay();
@@ -111,8 +111,6 @@ function clearDisplay() {
 }
 
 function deleteDigit() {
-  currentDisplay.textContent = currentDisplay.textContent.slice(
-    0,
-    currentDisplay.textContent.length - 1
-  );
+  currentOperand = Math.floor(currentOperand / 10);
+  updateDisplay();
 }
