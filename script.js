@@ -2,6 +2,7 @@ const previousDisplay = document.querySelector(".previous-display");
 const currentDisplay = document.querySelector(".current-display");
 const delButton = document.querySelector("[data-DEL");
 const clearButton = document.querySelector("[data-AC]");
+const plusMinusButton = document.querySelector("[data-plusMinus]");
 const operatorButtons = document.querySelectorAll("[data-operator");
 const numberButtons = document.querySelectorAll("[data-number");
 let currentOperand = "",
@@ -12,6 +13,8 @@ result = "";
 clearButton.addEventListener("click", clearDisplay);
 
 delButton.addEventListener("click", deleteDigit);
+
+plusMinusButton.addEventListener("click", plusMinus);
 
 numberButtons.forEach((number) =>
   number.addEventListener("click", (e) => appendNumber(e.target.textContent))
@@ -28,7 +31,15 @@ function compute(button) {
     currentOperand = "";
     updateDisplay();
   } else if (currentOperand === "") {
+    operator = button;
+    updateDisplay();
     return;
+  } else if (operator === "=") {
+    operator = button;
+    console.log(result);
+    console.log(currentOperand);
+    console.log(previousOperand);
+    updateDisplay();
   } else {
     switch (operator) {
       case "+":
@@ -79,6 +90,16 @@ function updateDisplay() {
 function displayResults() {
   previousDisplay.textContent = result + operator;
   currentDisplay.textContent = result;
+}
+
+function plusMinus() {
+  if (currentOperand === "") {
+    currentOperand = -result;
+    updateDisplay();
+  } else {
+    currentOperand = -currentOperand;
+    updateDisplay();
+  }
 }
 
 function clearDisplay() {
