@@ -93,8 +93,9 @@ function displayResults() {
 }
 
 function negate() {
-  if (currentOperand === "") {
-    currentOperand = -result;
+  if (operator === "=") {
+    previousOperand = -result;
+    currentOperand = "";
     updateDisplay();
   } else {
     currentOperand = -currentOperand;
